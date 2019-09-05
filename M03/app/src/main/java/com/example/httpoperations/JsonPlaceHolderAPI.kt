@@ -6,8 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 
 
@@ -17,37 +16,48 @@ interface JsonPlaceHolderApi {
     fun getEmployees(): Call<List<Employee>>
 
     @GET("employee/{id}")
-    fun getEmployeesById(@Path("id")employeeId:String)
+    fun getEmployeesById(@Path("id") employeeId: String): Call<List<Employee>>
 
     @GET("employee")
-    fun getEmployeeByAge(employeeId: String)}
+    fun getEmployeeByAge(@Query("age") employeeAge: String): Call<List<Employee>>
 
-class Factory {
+    @POST("employees")
+    fun addNewEmployee(@Body employee: Employee): Call<Employee>
 
-    companion object {
+    @PUT("employees")
+    fun updateEmployee(@Body employee: Employee): Call<Employee>
 
-        private const val BASE_URL = "https://demo8143297.mockable.io/"
+    @DELETE("employees/{id}")
+    fun deleteEmployeeById(@Path("id") id: String): Call<Void>
 
-        fun create(): JsonPlaceHolderApi {
 
-            val logger = HttpLoggingInterceptor()
-            logger.level = HttpLoggingInterceptor.Level.BASIC
-            logger.level = HttpLoggingInterceptor.Level.BODY
+    class Factory {
 
-            val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .retryOnConnectionFailure(false)
-                .readTimeout(10, TimeUnit.SECONDS)
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .build()
+        companion object {
 
-            val retrofit = Retrofit.Builder()
-                .client(okHttpClient)
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            private const val BASE_URL = "https://demo8143297.mockable.io/"
 
-            return retrofit.create(JsonPlaceHolderApi::class.java)
+            fun create(): JsonPlaceHolderApi {
+
+                val logger = HttpLoggingInterceptor()
+                logger.level = HttpLoggingInterceptor.Level.BASIC
+                logger.level = HttpLoggingInterceptor.Level.BODY
+
+                val okHttpClient = OkHttpClient.Builder()
+                    .addInterceptor(logger)
+                    .retryOnConnectionFailure(false)
+                    .readTimeout(10, TimeUnit.SECONDS)
+                    .connectTimeout(15, TimeUnit.SECONDS)
+                    .build()
+
+                val retrofit = Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+
+                return retrofit.create(JsonPlaceHolderApi::class.java)
+            }
         }
     }
 }
