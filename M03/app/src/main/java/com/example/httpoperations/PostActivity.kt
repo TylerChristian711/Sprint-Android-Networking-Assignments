@@ -23,7 +23,7 @@ class PostActivity : AppCompatActivity(), Callback<Employee> {
     lateinit var employeesService: JsonPlaceHolderApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_post)
+        setContentView(R.layout.activity_get_picker)
 
         title = "Post Request: New Employee David"
 

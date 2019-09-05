@@ -23,7 +23,7 @@ class PutActivity : AppCompatActivity(), Callback<Employee> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_put)
+        setContentView(R.layout.activity_get_picker)
 
         title = "Put Request: Update existing Employee Steve"
 

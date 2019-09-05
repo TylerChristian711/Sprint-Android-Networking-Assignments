@@ -13,7 +13,7 @@ class GetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_get)
+        setContentView(R.layout.activity_get_picker)
         employeesService = JsonPlaceHolderApi.Factory.create()
 
         val type = intent.getStringExtra("get")

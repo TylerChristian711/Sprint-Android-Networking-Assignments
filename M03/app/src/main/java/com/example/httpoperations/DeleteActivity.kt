@@ -24,7 +24,7 @@ class DeleteActivity : AppCompatActivity(), Callback<Void> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_delete_acticity)
+        setContentView(R.layout.activity_get_picker)
         title = "Delete Request: Delete existing employee with id 1"
 
         employeesService = JsonPlaceHolderApi.Factory.create()
